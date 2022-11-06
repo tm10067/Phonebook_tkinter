@@ -19,28 +19,27 @@ def main_menu():
             View.printPhoneBook()
         elif choice == 1:
             open_file()
+            print('\nФайл открыт!')
             View.printPhoneBook()
         elif choice == 2:
             save_file()
-            print('\nФайл сохранен!\n')
+            print('\nФайл сохранен!')
         elif choice == 3:
             Model.add_contact()
-            print('\nКонтакт добавлен\n')
         elif choice == 4:
             Model.change_contact()           
         elif choice == 5:
             Model.remove_contact()
-            print('\nКонтакт удален\n')
         elif choice == 7:
             save_backup()
-            print('\nРезервная копия сохранена!\n')
+            print('\nРезервная копия сохранена!')
         elif choice == 8:
             save_backup()
-            print('\nФайл восстановлен с резервной копии!\n')
+            print('\nФайл восстановлен с резервной копии!')
         elif choice == 9:
             break
         else:
-            print("'\nНеправильно набран номер!\n'")
+            print('\nНеправильно набран номер!')
 
 def start():
     open_file()
