@@ -4,30 +4,39 @@ import View
 def main_menu():
     while True:
         print('\nТелефонный справочник - главное меню:')
-        print('0. Показать все контакты')
-        print('1. Открыть файл с контактами')
-        print('2. Записать файл с контактами')
+        print('0. Показать все контакты (текущая версия)')
+        print('1. Открыть файл с контактами (перезаписывает текущую версию)')
+        print('2. Записать текущую версию в файл с контактами')
         print('3. Добавить контакт')
         print('4. Изменить контакт')
         print('5. Удалить контакт')
-        print('6. Поиск п контактам')
+        print('6. Поиск по контактам')
+        print('7. Записать резервную копию файла')
+        print('8. Восстановить файл с резервной копии')
         print('9. Выйти из программы')
         choice = int(input('Выберите пункт: '))
         if choice == 0:
             View.printPhoneBook()
-
+        elif choice == 1:
+            open_file()
+            View.printPhoneBook()
         elif choice == 2:
             save_file()
             print('\nФайл сохранен!\n')
         elif choice == 3:
-            add_contact()
+            Model.add_contact()
             print('\nКонтакт добавлен\n')
         elif choice == 4:
-            change_contact()           
+            Model.change_contact()           
         elif choice == 5:
-            remove_contact()
+            Model.remove_contact()
             print('\nКонтакт удален\n')
-
+        elif choice == 7:
+            save_backup()
+            print('\nРезервная копия сохранена!\n')
+        elif choice == 8:
+            save_backup()
+            print('\nФайл восстановлен с резервной копии!\n')
         elif choice == 9:
             break
         else:
@@ -46,28 +55,15 @@ def save_file():
     with open(Model.path, "w", encoding="UTF-8") as data:
         data.write(('\n'.join(Model.phonebook)))
 
-def add_contact():
-    name = input('Введите имя: ')
-    surname = input('Введите фамилию: ')
-    last_name = input('Введите отчество: ')
-    phone = input('Введите телефон: ')
-    contact = f'{name}; {surname}; {last_name}; {phone};\n'
-    Model.phonebook.append(contact)
-    View.printPhoneBook()
+def save_backup():
+    with open(Model.path, "r", encoding="UTF-8") as source:
+        backup = source.read()
+    with open(Model.path_backup, "w", encoding="UTF-8") as data:
+        data.write(backup)
 
-def remove_contact():
-    choice = int(input('Введите номер элемента для удаления: '))
-    Model.phonebook.pop(choice)
-    View.printPhoneBook()
-
-def change_contact():
-    choice = int(input('Введите номер элемента для изменения: '))
-    choice2 = int(input('Что изменяем (0-имя, 1-фамилия, 2-отчество, 3-телефон): '))
-    contact = Model.phonebook.pop(choice).split(';')
-    print(contact)
-    contact[choice2] = input('Введите новое значение: ')
-    print(contact)
-    Model.phonebook.insert(choice, '; '.join(contact))
-    View.printPhoneBook()
-
+def restore_from_backup():
+    with open(Model.path_backup, "r", encoding="UTF-8") as source:
+        backup = source.read()
+    with open(Model.path, "w", encoding="UTF-8") as data:
+        data.write(backup)
 
