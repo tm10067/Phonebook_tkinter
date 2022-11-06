@@ -1,3 +1,3 @@
 phonebook = []
 
-path = 'phone.txt'
+path = 'PhoneBookConsole/phone.txt'
