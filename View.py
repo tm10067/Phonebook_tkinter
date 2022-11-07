@@ -1,8 +1,19 @@
 import Model
 
-
-def printPhoneBook():
-    print("\n***Телефонный справочник***")
-    for i, item in enumerate(Model.phonebook, 1):
+def printPhoneBook(header, list):
+    print(f"\n***{header}***")
+    for i, item in enumerate(list, 1):
         print(i , item)
 
+def print_menu():
+    print('\nТелефонный справочник - главное меню:')
+    print('0. Показать все контакты (текущая версия)')
+    print('1. Открыть файл с контактами (перезаписывает текущую версию)')
+    print('2. Записать текущую версию в файл с контактами')
+    print('3. Добавить контакт')
+    print('4. Изменить контакт')
+    print('5. Удалить контакт')
+    print('6. Поиск по контактам')
+    print('7. Записать резервную копию файла')
+    print('8. Восстановить файл с резервной копии')
+    print('9. Выйти из программы')

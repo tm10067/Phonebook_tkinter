@@ -3,24 +3,14 @@ import View
 
 def main_menu():
     while True:
-        print('\nТелефонный справочник - главное меню:')
-        print('0. Показать все контакты (текущая версия)')
-        print('1. Открыть файл с контактами (перезаписывает текущую версию)')
-        print('2. Записать текущую версию в файл с контактами')
-        print('3. Добавить контакт')
-        print('4. Изменить контакт')
-        print('5. Удалить контакт')
-        print('6. Поиск по контактам')
-        print('7. Записать резервную копию файла')
-        print('8. Восстановить файл с резервной копии')
-        print('9. Выйти из программы')
+        View.print_menu()
         choice = int(input('Выберите пункт: '))
         if choice == 0:
-            View.printPhoneBook()
+            View.printPhoneBook("Телефонный справочник", Model.phonebook)
         elif choice == 1:
             open_file()
             print('\nФайл открыт!')
-            View.printPhoneBook()
+            View.printPhoneBook("Телефонный справочник", Model.phonebook)
         elif choice == 2:
             save_file()
             print('\nФайл сохранен!')
@@ -30,6 +20,8 @@ def main_menu():
             Model.change_contact()           
         elif choice == 5:
             Model.remove_contact()
+        elif choice == 6:
+            Model.find_contact()
         elif choice == 7:
             save_backup()
             print('\nРезервная копия сохранена!')
@@ -66,3 +58,11 @@ def restore_from_backup():
     with open(Model.path, "w", encoding="UTF-8") as data:
         data.write(backup)
 
+def try_enter_int(enter_text):
+    while True:
+        text = input(f'{enter_text}')
+        try:
+            return int(text)
+        except:
+            print ('\nНеправильно набран номер')
+        
