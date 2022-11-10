@@ -3,6 +3,8 @@ from tkinter import messagebox
 import Model
 import Controller
      
+missing = '<не указано>'
+
 def no_selection_error():
     messagebox.showerror('Ошибка: не выбран пункт', 'Ничего не выбрано!')
 
