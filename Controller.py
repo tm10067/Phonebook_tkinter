@@ -35,13 +35,3 @@ def restore_from_backup():
         data.write(backup)
     open_file()
     Model.update_book()
-
-
-# def try_enter_int(enter_text):
-#     while True:
-#         text = input(f'{enter_text}')
-#         try:
-#             return int(text)
-#         except:
-#             print ('\nНеправильно набран номер')
-        
