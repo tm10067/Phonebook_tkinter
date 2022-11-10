@@ -54,7 +54,25 @@ def update_book():
     select.delete(0, 'end')
     for i in range(len(phonebook)):
         entry_list = phonebook[i].strip().strip(';').split('; ')
-        select.insert('end', f'{i + 1}. {entry_list[1]} {entry_list[0]} {entry_list[2]} | {entry_list[3]}')
+        try:
+            name = entry_list[0].strip()
+        except IndexError:
+            name = View.missing
+        if name == '':
+            name = View.missing
+        try:
+            surname = entry_list[1]
+        except IndexError:
+            surname = View.missing
+        try:
+            last_name = entry_list[2]
+        except IndexError:
+            last_name = View.missing
+        try:
+            phone = entry_list[3]
+        except IndexError:
+            phone = View.missing
+        select.insert('end', f'{i + 1}. {surname} {name} {last_name} | {phone}')
 
 def filter_contacts():
     select.delete(0, 'end')
